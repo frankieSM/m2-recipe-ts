@@ -1,3 +1,5 @@
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import Search from "./components/Search";
 
 function App() {
@@ -10,3 +12,5 @@ function App() {
 }
 
 export default App;
+
+//Remember to wrap app with <BrowserRouter> or <Router>
