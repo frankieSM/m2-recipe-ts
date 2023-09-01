@@ -1,9 +1,10 @@
-import Home from './pages/Home';
+import Pages from './pages/Pages';
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      Hell's Kitchen
+      <Pages />
     </div>
   );
 }
