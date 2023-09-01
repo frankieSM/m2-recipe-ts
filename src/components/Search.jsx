@@ -39,22 +39,3 @@ const StyledForm = styled.form`
 `;
 
 export default Search;
-
-// function Search() {
-//   const [input, setInput] = useState("");
-
-//   const submitHandler = (e) => {
-//     e.preventDefault();
-//     console.log("working");
-//   };
-
-//   return (
-//     <form>
-//       <input
-//         type="text"
-//         onChange={(e) => setInput(e.target.value)}
-//         value={input}
-//       />
-//     </form>
-//   );
-// }
