@@ -15,3 +15,7 @@ function Home() {
 }
 
 export default Home;
+
+//When pages components are finished
+//render out <Pages /> instead of
+//individual components
