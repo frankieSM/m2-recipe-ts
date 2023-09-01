@@ -1,4 +1,5 @@
-import Popular from "../components/popular";
+import Search from "../components/Search";
+import Popular from "../components/Popular";
 import Desserts from "../components/desserts";
 
 import React from "react";
@@ -6,7 +7,8 @@ import React from "react";
 function Home() {
   return (
     <div>
-      <Popular />\
+      <Search />
+      <Popular />
       <Desserts />
     </div>
   );

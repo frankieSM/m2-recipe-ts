@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import Search from "./components/Search";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="App">
       <h1>Recipe App</h1>
-      <Search />
+      <Home />
     </div>
   );
 }
