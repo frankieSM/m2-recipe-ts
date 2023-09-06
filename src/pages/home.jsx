@@ -1,6 +1,6 @@
 import Search from "../components/Search";
 import Popular from "../components/Popular";
-import Desserts from "../components/desserts";
+import Desserts from "../components/Desserts";
 
 import React from "react";
 
