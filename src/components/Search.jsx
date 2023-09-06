@@ -4,14 +4,21 @@ import { useNavigate } from "react-router-dom";
 
 function Search() {
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
+    navigate("/searched/ + input");
   };
 
   return (
     <StyledForm onSubmit={submitHandler}>
-      <input type="text" placeholder="Hungry? Start here..." />
+      <input
+        onChange={(e) => setInput(e.target.value)}
+        type="text"
+        placeholder="Hungry? Start here..."
+        value={input}
+      />
     </StyledForm>
   );
 }
