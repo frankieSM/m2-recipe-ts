@@ -1,5 +1,5 @@
-import Popular from "../components/Popular";
-import Desserts from "../components/Desserts";
+import Popular from "../components/popular";
+import Desserts from "../components/desserts";
 
 import React from "react";
 
