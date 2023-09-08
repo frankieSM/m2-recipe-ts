@@ -56,6 +56,7 @@ function Recipe() {
         ;
       </Info>
     </DetailWrapper>
+    
   );
 }
 
