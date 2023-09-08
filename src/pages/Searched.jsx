@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function Searched() {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
@@ -23,8 +24,10 @@ function Searched() {
     <RecipeGrid>
       {searchedRecipes.map((recipe) => (
         <RecipeCardContainer key={recipe.id}>
-          <RecipeImage src={recipe.image} alt={recipe.title} />
-          <RecipeTitle>{recipe.title}</RecipeTitle>
+          <Link to={"/recipe" + recipe.id}>
+            <RecipeImage src={recipe.image} alt={recipe.title} />
+            <RecipeTitle>{recipe.title}</RecipeTitle>
+          </Link>
         </RecipeCardContainer>
       ))}
     </RecipeGrid>
