@@ -24,7 +24,7 @@ function Searched() {
     <RecipeGrid>
       {searchedRecipes.map((recipe) => (
         <RecipeCardContainer key={recipe.id}>
-          <Link to={"/recipe" + recipe.id}>
+          <Link to={"/recipe/" + recipe.id}>
             <RecipeImage src={recipe.image} alt={recipe.title} />
             <RecipeTitle>{recipe.title}</RecipeTitle>
           </Link>

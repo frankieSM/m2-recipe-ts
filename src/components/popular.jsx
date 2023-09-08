@@ -21,22 +21,17 @@ function Popular() {
 
   return (
     <div>
-      <h2>Popular Recipes</h2>
-      {popular.map((recipe) => {
-        return (
-          <Carousel>
-            <h2>Popular Recipes</h2>
-            {popular.map((recipe) => {
-              return (
-                <Card>
-                  <p>{recipe.title}</p>
-                  <img src={recipe.image} alt={recipe.title} />
-                </Card>
-              );
-            })}
-          </Carousel>
-        );
-      })}
+      <Carousel>
+        <h2>Popular Recipes</h2>
+        {popular.map((recipe) => {
+          return (
+            <Card>
+              <p>{recipe.title}</p>
+              <img src={recipe.image} alt={recipe.title} />
+            </Card>
+          );
+        })}
+      </Carousel>
     </div>
   );
 }
