@@ -1,88 +1,43 @@
 const express = require("express");
-const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const cors = require("cors");
-const pool = require("./db");
+const userController = require("./controller");
 
+const app = express();
 
-//Middleware 
+mongoose
+  .connect(
+    process.env.DB_URI ||
+      "mongodb://localhost:27017/Roberto",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => {
+    console.log("Successfully connected to MongoDB Atlas!");
+  })
+  .catch((error) => {
+    console.log("Unable to connect to MongoDB Atlas!");
+    console.error(error);
+  });
+
+// parse requests of content-type: application/json
+app.use(bodyParser.json());
+// parse requests of content-type: application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.json()); //req body
+app.options("*", cors());
 
-//Routes
-
-//Create a recipe
-app.post("/recipe", async (req, res) => {
-  try {
-    const { description } = req.body;
-    const newRecipe = await pool.query(
-      "INSERT INTO recipe (description) VALUES($1) RETURNING *",
-      [description]
-    );
-    res.json(newRecipe.rows[0]);
-  } catch (err){
-    console.error(err.message);
-  }
-});
-
-//Get all recipe
-
-app.get("/recipe", async (req, res) => {
-  try {
-    const allRecipe = await pool.query("SELECT * FROM recipe");
-    res.json(allRecipe.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-//Get a recipe
-
-app.get("/recipe/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const recipe = await pool.query("SELECT * FROM recipe WHERE recipe_id = $1", [
-      id
-    ]);
-
-    res.json(recipe.rows[0]);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-
-//Update a recipe
-
-app.put("/recipe/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { description } = req.body;
-    const updateRecipe = await pool.query(
-      "UPDATE recipe SET description = $1 WHERE recipe_id = $2",
-      [description, id]
-    );
-
-    res.json("Recipe was updated!");
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-//Delete a recipe
-
-app.delete("/recipe/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deleteRecipe = await pool.query("DELETE FROM recipe WHERE recipe_id = $1", [
-      id
-    ]);
-    res.json("Recipe was deleted!");
-  } catch (err) {
-    console.log(err.message);
-  }
-});
-
-
-app.listen(3000, () => {
-  console.log("server has started on port 3000");
+// list all the suppliers
+app.post("/login", userController.login);
+app.post("/signup", userController.signup);
+app.get("/profile/:id", userController.getProfile);
+app.post("/addRecipe/:id", userController.addRecipe);
+app.post("/deleteRecipe/:id", userController.deleteRecipe);
+// set port, listen for requests
+const app_port = process.env.APP_PORT || 3001;
+app.listen(app_port, () => {
+  console.log(`Server is running on port ${app_port}.`);
 });
