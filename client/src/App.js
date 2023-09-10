@@ -6,14 +6,6 @@ import Login from "./pages/Login";
 
 function App() {
 
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("https://dishdelight.onrender.com/")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  })
-
   return (
     <div className="App">
       <BrowserRouter>

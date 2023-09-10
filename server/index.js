@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const userController = require("./controller");
 
-const app = express();
-
 app.get("/searched/:search", (req, res) => {
   const searchTerm = req.params.search;
   console.log(`Received request for search term: ${searchTerm}`);
