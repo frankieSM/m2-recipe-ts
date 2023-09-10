@@ -94,38 +94,36 @@ const Card = styled.div`
   min-height: 19rem;
   overflow: hidden;
   position: relative;
-
-  img {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  display: flex;
+  flex-direction: column; 
 
   p {
-    position: absolute;
-    bottom: 0; /* Position the text at the bottom of the card */
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
     font-weight: bold;
     padding: 8px;
     margin: 0;
   }
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 
 const Button = styled.button`
-  background-color: #000;
-  color: white;
-  border: none;
+  background-color: #white;
+  color: black;
+  border: 2px solid black;
   padding: 5px 10px;
   cursor: pointer;
   position: absolute;
-  bottom: 8px; /* Adjust the bottom spacing as needed */
+  bottom: 8px;
   left: 50%;
-  transform: translateX(-50%); /* Center the button horizontally */
+  transform: translateX(-50%);
 `;
 
 export default Popular;

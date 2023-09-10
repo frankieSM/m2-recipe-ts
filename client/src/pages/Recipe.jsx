@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import React from "react";
+import axios from "axios";
+import { message } from "antd";
 
 function Recipe() {
   let params = useParams();
   const [details, setDetails] = useState({});
   const [activeTab, setActiveTab] = useState("instructions");
+
+  const userId = localStorage.getItem("userId");
 
   const fetchDetails = async () => {
     const data = await fetch(
@@ -21,11 +25,36 @@ function Recipe() {
     fetchDetails();
   }, [params.name]);
 
+  const addToFavorites = async (recipeId, recipeTitle) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/addRecipe/${userId}`,
+        {
+          recipeId,
+          recipeTitle,
+        }
+      );
+      console.log(response.data);
+
+      if (response.status === 201) {
+        message.success("Recipe added to favorites");
+      } else {
+        message.error("Recipe not added to favorites");
+      }
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      message.error("Recipe not added to favorites");
+    }
+  };
+
   return (
     <DetailWrapper>
       <div>
         <h2>{details.title}</h2>
         <img src={details.image} alt="" />
+        <Button onClick={() => addToFavorites(details.id, details.title)}>
+          Add to Favorite List
+        </Button>
       </div>
       <Info>
         <Button
@@ -94,17 +123,6 @@ const Info = styled.div`
 `;
 
 export default Recipe;
-
-
-
-
-
-
-
-
-
-
-
 
 // import { useEffect, useState } from "react";
 // import styled from "styled-components";
