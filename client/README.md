@@ -1,6 +1,6 @@
-# Recipe React App By the Iron Dev Team UNLV Software Bootcamp Class!
+# DishDelight By the Iron Dev Team UNLV Software Bootcamp Class!
 
-This Recipe React App has many components as well as pages that let you explore the cookbook dream! This app features many unique languages and programs such as React, CRUD, Node.js, JavaScript, MongoDB, Express, etc. It has multiple different recipes that display how to prepare as well as execute a perfect dish! You can save your favorite dishes while you're exploring the wonderful API [Spoonacular Food API](https://spoonacular.com/food-api) provides! Make sure you create an account to always have that handy app ready to display everything you need to start cooking. Tired of spending money on a cookbook? This is a free app to help you improve your cooking skills!
+DishDelight has many components as well as pages that let you explore the cookbook dream! This app features many unique languages and programs such as React, CRUD, Node.js, JavaScript, MongoDB, Express, etc. It has multiple different recipes that display how to prepare as well as execute a perfect dish! You can save your favorite dishes while you're exploring the wonderful API [Spoonacular Food API](https://spoonacular.com/food-api) provides! Make sure you create an account to always have that handy app ready to display everything you need to start cooking. Tired of spending money on a cookbook? This is a free app to help you improve your cooking skills!
 
 Come take the risk with us and let's make cooking fun and flavorful!
 
