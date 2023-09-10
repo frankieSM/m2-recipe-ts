@@ -6,6 +6,16 @@ const userController = require("./controller");
 
 const app = express();
 
+app.get("/searched/:search", (req, res) => {
+  const searchTerm = req.params.search;
+  console.log(`Received request for search term: ${searchTerm}`);
+
+  // Handle the request logic here
+
+  res.send(`You searched for: ${searchTerm}`);
+});
+
+
 mongoose
   .connect(
     process.env.DB_URI ||

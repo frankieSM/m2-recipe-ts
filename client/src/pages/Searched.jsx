@@ -12,13 +12,26 @@ function Searched() {
     const data = await fetch(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${name}`
     );
+
+    // Log the API URL for troubleshooting
+    console.log("API URL:", data.url);
+
     const recipes = await data.json();
     setSearchedRecipes(recipes.results);
+
+    // Log the fetched recipes for troubleshooting
+    console.log("Fetched Recipes:", recipes.results);
   };
 
   useEffect(() => {
     getSearched(params.search);
+
+    // Log the search term from URL for troubleshooting
+    console.log("Search Term from URL:", params.search);
   }, [params.search]);
+
+  // Log the searchedRecipes array for troubleshooting
+  console.log("Searched Recipes Array:", searchedRecipes);
 
   return (
     <RecipeGrid>

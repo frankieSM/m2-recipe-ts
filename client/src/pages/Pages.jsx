@@ -9,7 +9,7 @@ import { Route, Routes } from "react-router-dom";
 
 function Pages() {
   return (
-    <>
+    <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,7 +18,7 @@ function Pages() {
         <Route path="/searched/:search" element={<Searched />} />
         <Route path="/recipe/:name" element={<Recipe />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
