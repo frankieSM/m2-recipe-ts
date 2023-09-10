@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { message } from "antd";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+
 function Popular() {
   const [popular, setPopular] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,67 +52,81 @@ function Popular() {
   };
 
   return (
-    <Container>
-      <h2>Popular Recipes</h2>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <RecipeList>
-          {popular.map((recipe) => (
-            <RecipeCard key={recipe.id}>
-              <RecipeImage src={recipe.image} alt={recipe.title} />
-              <RecipeTitle>{recipe.title}</RecipeTitle>
-              <Button onClick={() => addToFavorites(recipe.id, recipe.title)}>
-                Add to Favorite List
-              </Button>
-            </RecipeCard>
-          ))}
-        </RecipeList>
-      )}
-    </Container>
+    <div>
+      <Carousel>
+        <h2>Most Popular</h2>
+        <Splide
+          options={{
+            perPage: 4,
+            arrows: false,
+            pagination: true,
+            drag: "free",
+            gap: "1rem",
+          }}
+        >
+          {popular &&
+            popular.length > 0 &&
+            popular.map((recipe) => (
+              <SplideSlide key={recipe.id}>
+                <Card>
+                  <p>{recipe.title}</p>
+                  <img src={recipe.image} alt={recipe.title} />
+                  <Button
+                    onClick={() => addToFavorites(recipe.id, recipe.title)}
+                  >
+                    Add to Favorite List
+                  </Button>
+                </Card>
+              </SplideSlide>
+            ))}
+        </Splide>
+      </Carousel>
+    </div>
   );
 }
 
-const Container = styled.div`
-  padding: 20px;
-`;
-
-const RecipeList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-`;
-
-const RecipeCard = styled.div`
-  border: 1px solid #ddd;
-  padding: 10px;
+const Carousel = styled.div`
+  margin: 4rem 25rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
 `;
 
-const RecipeImage = styled.img`
-  max-width: 100%;
-  height: auto;
+const Card = styled.div`
+  min-height: 19rem;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  p {
+    position: absolute;
+    bottom: 0; /* Position the text at the bottom of the card */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent background */
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    margin: 0;
+  }
 `;
 
-const RecipeTitle = styled.h3`
-  margin: 10px 0;
-  font-size: 16px;
-`;
 
 const Button = styled.button`
-  background-color: #007bff;
+  background-color: #000;
   color: white;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
+  position: absolute;
+  bottom: 8px; /* Adjust the bottom spacing as needed */
+  left: 50%;
+  transform: translateX(-50%); /* Center the button horizontally */
 `;
 
 export default Popular;
+
