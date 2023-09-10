@@ -2,7 +2,8 @@ import React from "react";
 import { FaPizzaSlice, FaHamburger } from "react-icons/fa";
 import { GiNoodles, GiChopsticks } from "react-icons/gi";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 function Navbar() {
   const handleLogout = () => {
@@ -10,6 +11,13 @@ function Navbar() {
     localStorage.removeItem("userId");
     window.location.href = "/";
   };
+
+//   const navigate = useNavigate();
+
+// const handleViewRecipe = (recipeName) => {
+//   navigate(`/recipe/${recipeName}`);
+// };
+
 
   const userId = localStorage.getItem("userId");
   return (
