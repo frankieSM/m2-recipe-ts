@@ -1,5 +1,7 @@
 import Popular from "../components/Popular";
 import Search from "../components/Search";
+import Desserts from "../components/Desserts";
+import Vegan from "../components/Vegan";
 import React from "react";
 
 function Home() {
@@ -7,6 +9,8 @@ function Home() {
     <div>
       <Search />
       <Popular />
+      <Desserts />
+      <Vegan />
     </div>
   );
 }
