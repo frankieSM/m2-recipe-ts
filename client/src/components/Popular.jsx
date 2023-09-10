@@ -69,8 +69,8 @@ function Popular() {
             popular.map((recipe) => (
               <SplideSlide key={recipe.id}>
                 <Card>
-                  <p>{recipe.title}</p>
-                  <img src={recipe.image} alt={recipe.title} />
+                  <CardTitle>{recipe.title}</CardTitle>
+                  <CardImage src={recipe.image} alt={recipe.title} />
                   <Button
                     onClick={() => addToFavorites(recipe.id, recipe.title)}
                   >
@@ -95,24 +95,8 @@ const Card = styled.div`
   overflow: hidden;
   position: relative;
   display: flex;
-  flex-direction: column; 
-
-  p {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-weight: bold;
-    padding: 8px;
-    margin: 0;
-  }
-
-  img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  flex-direction: column;
 `;
-
 
 const Button = styled.button`
   background-color: #white;
@@ -126,5 +110,18 @@ const Button = styled.button`
   transform: translateX(-50%);
 `;
 
-export default Popular;
+const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
+const CardTitle = styled.p`
+  background: linear-gradient(35deg, #a32b21, #761d14);
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  margin: 0;
+`;
+
+export default Popular;

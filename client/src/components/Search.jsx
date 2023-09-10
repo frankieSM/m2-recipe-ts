@@ -35,16 +35,20 @@ const StyledForm = styled.form`
   background: linear-gradient(35deg, #a32b21, #761d14);
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: white;
 
   input {
     border: none;
     background: linear-gradient(35deg, #a32b21, #761d14);
     font-size: 1.5rem;
-    color: white;
+    font-weight: bold;
     padding: 1rem 3rem;
     border-radius: 1rem;
     outline: none;
     flex: 1;
+    &::placeholder {
+      color: white; /* Set the placeholder text color */
+      opacity: 0.7; /* Adjust opacity as needed */
   }
 
   .gradient-end {
