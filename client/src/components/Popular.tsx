@@ -5,8 +5,14 @@ import { message } from "antd";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
+interface Recipe {
+  id: number;
+  title: string;
+  image: string;
+}
+
 function Popular() {
-  const [popular, setPopular] = useState([]);
+  const [popular, setPopular] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem("userId");
@@ -29,7 +35,7 @@ function Popular() {
     }
   };
 
-  const addToFavorites = async (recipeId: any, recipeTitle: any) => {
+  const addToFavorites = async (recipeId: number, recipeTitle: string) => {
     try {
       const response = await axios.post(
         `http://localhost:3001/addRecipe/${userId}`,
