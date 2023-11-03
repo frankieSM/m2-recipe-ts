@@ -14,7 +14,7 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: any) => {
     try {
       // Make an API request to submit the form data to your backend
       const response = await axios.post("http://localhost:3001/signup", values);

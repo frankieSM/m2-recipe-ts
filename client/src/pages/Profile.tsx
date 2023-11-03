@@ -95,15 +95,15 @@ function UserProfile() {
   }
 
   // Function to handle viewing a recipe (you can implement this)
-  const handleViewRecipe = (recipeId) => {
+  const handleViewRecipe = (recipeId: any) => {
     // Implement the logic to view a specific recipe
     navigate(`/recipe/recipe/${recipeId}`);
   };
 
   // Function to handle removing a recipe (you can implement this)
-  const handleRemoveRecipe = async (recipeId) => {
+  const handleRemoveRecipe = async (recipeId: any) => {
     // Implement the logic to remove a specific recipe
-    const newRecipes = user.recipes.filter((recipe) => recipe.id !== recipeId);
+    const newRecipes = user.recipes.filter((recipe: { id: any; }) => recipe.id !== recipeId);
     setUser({ ...user, recipes: newRecipes });
 
     try {

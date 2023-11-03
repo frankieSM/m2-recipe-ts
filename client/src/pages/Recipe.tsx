@@ -25,7 +25,7 @@ function Recipe() {
     fetchDetails();
   }, [params.name]);
 
-  const addToFavorites = async (recipeId, recipeTitle) => {
+  const addToFavorites = async (recipeId: any, recipeTitle: any) => {
     try {
       const response = await axios.post(
         `http://localhost:3001/addRecipe/${userId}`,
@@ -77,9 +77,25 @@ function Recipe() {
         )}
         {activeTab === "ingredients" && (
           <ul>
-            {details.extendedIngredients.map((ingredient) => (
-              <li key={ingredient.id}>{ingredient.original}</li>
-            ))}
+            {details.extendedIngredients.map(
+              (ingredient: {
+                id: React.Key | null | undefined;
+                original:
+                  | string
+                  | number
+                  | boolean
+                  | React.ReactElement<
+                      any,
+                      string | React.JSXElementConstructor<any>
+                    >
+                  | Iterable<React.ReactNode>
+                  | React.ReactPortal
+                  | null
+                  | undefined;
+              }) => (
+                <li key={ingredient.id}>{ingredient.original}</li>
+              )
+            )}
           </ul>
         )}
       </Info>

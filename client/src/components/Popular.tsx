@@ -29,7 +29,7 @@ function Popular() {
     }
   };
 
-  const addToFavorites = async (recipeId, recipeTitle) => {
+  const addToFavorites = async (recipeId: any, recipeTitle: any) => {
     try {
       const response = await axios.post(
         `http://localhost:3001/addRecipe/${userId}`,

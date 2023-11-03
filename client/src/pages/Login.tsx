@@ -8,7 +8,7 @@ import axios from "axios";
 function Login() {
   const navigate = useNavigate();
 
-  const onFinish = async (values) => {
+  const onFinish = async (values: any) => {
     try {
       // Make an API request to authenticate the user
       const response = await axios.post("http://localhost:3001/login", values);
