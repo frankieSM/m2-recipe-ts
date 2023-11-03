@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./login.module.css";
-import loginIllustration from "../assets/login.jpeg";
+import "../assets/login.jpeg";
 import { Row, Col, Typography, Form, Input, Button, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -34,7 +34,7 @@ function Login() {
         {/* Left Section of Picture */}
         <Col sm={0} md={12} lg={12} xs={12} className={styles.left}>
           <div>
-            <img src={loginIllustration} alt="Login Illustration" />
+            <img src="client\src\assets\login.jpeg" alt="Login Illustration" />
           </div>
         </Col>
 

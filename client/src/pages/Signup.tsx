@@ -4,7 +4,7 @@ import { Row, Col, Typography, Form, Input, Button, Select } from "antd";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import signupImage from "../assets/signup.jpeg";
+import "../assets/signup.jpeg";
 import axios from "axios";
 
 const { Option } = Select;
@@ -40,7 +40,7 @@ function Signup() {
         {/* Left Section of Picture */}
         <Col sm={0} md={12} lg={12} xs={12} className={styles.left}>
           <div>
-            <img src={signupImage} alt="Login Illustration" />
+            <img src="client\src\assets\signup.jpeg" alt="Login Illustration" />
           </div>
         </Col>
 

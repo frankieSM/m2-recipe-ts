@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-const rootElement = document.getElementById("root");
+const root = document.getElementById("root");
 
-if (rootElement) {
+if (root) {
   ReactDOM.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
-    rootElement
+    root
   );
 }
 
@@ -24,4 +24,4 @@ if (rootElement) {
 //   <React.StrictMode>
 //     <App />
 //   </React.StrictMode>
-// );
+// )
