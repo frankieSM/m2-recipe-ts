@@ -4,8 +4,14 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+interface Recipe {
+  id: number;
+  title: string;
+  image: string;
+}
+
 function Searched() {
-  const [searchedRecipes, setSearchedRecipes] = useState([]);
+  const [searchedRecipes, setSearchedRecipes] = useState<Recipe[]>([]);
   let params = useParams();
 
   const getSearched = async (name: string | undefined) => {

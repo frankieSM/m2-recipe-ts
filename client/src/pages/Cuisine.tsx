@@ -3,8 +3,14 @@ import styled from "styled-components";
 // import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 
+interface Recipe {
+  id: number;
+  title: string;
+  image: string;
+}
+
 function Cuisine() {
-  const [cuisine, setCuisine] = useState([]);
+  const [cuisine, setCuisine] = useState<Recipe[]>([]);
   let params = useParams();
 
   const getCuisine = async (name: string | undefined) => {

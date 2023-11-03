@@ -1,58 +1,81 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import React from "react";
 import axios from "axios";
 import { message } from "antd";
+import React from "react";
+
+interface RecipeDetails {
+  title: string;
+  image: string;
+  id: number;
+  summary: string;
+  instructions: string;
+  extendedIngredients: Ingredient[];
+}
+
+interface Ingredient {
+  id: number;
+  original: string;
+}
 
 function Recipe() {
   let params = useParams();
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState<RecipeDetails | null>(null);
   const [activeTab, setActiveTab] = useState("instructions");
 
   const userId = localStorage.getItem("userId");
 
   const fetchDetails = async () => {
-    const data = await fetch(
-      `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
-    );
-    const detailData = await data.json();
-    setDetails(detailData);
-    console.log(detailData);
+    try {
+      const data = await fetch(
+        `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+      );
+      const detailData: RecipeDetails = await data.json();
+      setDetails(detailData);
+      console.log(detailData);
+    } catch (error) {
+      console.error("Error fetching recipe details:", error);
+    }
   };
 
   useEffect(() => {
     fetchDetails();
   }, [params.name]);
 
-  const addToFavorites = async (recipeId: any, recipeTitle: any) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/addRecipe/${userId}`,
-        {
-          recipeId,
-          recipeTitle,
-        }
-      );
-      console.log(response.data);
+  const addToFavorites = async (
+    recipeId: number | undefined,
+    recipeTitle: string | undefined
+  ) => {
+    if (recipeId && recipeTitle) {
+      try {
+        const response = await axios.post(
+          `http://localhost:3001/addRecipe/${userId}`,
+          {
+            recipeId,
+            recipeTitle,
+          }
+        );
+        console.log(response.data);
 
-      if (response.status === 201) {
-        message.success("Recipe added to favorites");
-      } else {
+        if (response.status === 201) {
+          message.success("Recipe added to favorites");
+        } else {
+          message.error("Recipe not added to favorites");
+        }
+      } catch (error) {
+        console.error("Error adding to favorites:", error);
         message.error("Recipe not added to favorites");
       }
-    } catch (error) {
-      console.error("Error adding to favorites:", error);
-      message.error("Recipe not added to favorites");
     }
   };
 
   return (
     <DetailWrapper>
       <div>
-        <h2>{details.title}</h2>
-        <img src={details.image} alt="" />
-        <Button onClick={() => addToFavorites(details.id, details.title)}>
+        <h2>{details?.title}</h2>
+        <img src={details?.image} alt="" />
+        <Button onClick={() => addToFavorites(details?.id, details?.title)}>
           Add to Favorite List
         </Button>
       </div>
@@ -71,31 +94,19 @@ function Recipe() {
         </Button>
         {activeTab === "instructions" && (
           <div>
-            <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
-            <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
+            <h3
+              dangerouslySetInnerHTML={{ __html: details?.summary || "" }}
+            ></h3>
+            <h3
+              dangerouslySetInnerHTML={{ __html: details?.instructions || "" }}
+            ></h3>
           </div>
         )}
         {activeTab === "ingredients" && (
           <ul>
-            {details.extendedIngredients.map(
-              (ingredient: {
-                id: React.Key | null | undefined;
-                original:
-                  | string
-                  | number
-                  | boolean
-                  | React.ReactElement<
-                      any,
-                      string | React.JSXElementConstructor<any>
-                    >
-                  | Iterable<React.ReactNode>
-                  | React.ReactPortal
-                  | null
-                  | undefined;
-              }) => (
-                <li key={ingredient.id}>{ingredient.original}</li>
-              )
-            )}
+            {details?.extendedIngredients?.map((ingredient) => (
+              <li key={ingredient.id}>{ingredient.original}</li>
+            ))}
           </ul>
         )}
       </Info>

@@ -7,6 +7,20 @@ import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  age: number;
+  gender: string;
+  recipes: Recipe[];
+}
+
+interface Recipe {
+  id: number;
+  title: string;
+}
+
 const Container = styled.div`
   padding: 20px;
   background-color: #f7f7f7;
@@ -76,7 +90,7 @@ const ActionButton = styled(Button)`
 
 function UserProfile() {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,16 +109,20 @@ function UserProfile() {
   }
 
   // Function to handle viewing a recipe (you can implement this)
-  const handleViewRecipe = (recipeId: any) => {
+  const handleViewRecipe = (recipeId: number) => {
     // Implement the logic to view a specific recipe
     navigate(`/recipe/recipe/${recipeId}`);
   };
 
   // Function to handle removing a recipe (you can implement this)
-  const handleRemoveRecipe = async (recipeId: any) => {
+  const handleRemoveRecipe = async (recipeId: number) => {
     // Implement the logic to remove a specific recipe
-    const newRecipes = user.recipes.filter((recipe: { id: any; }) => recipe.id !== recipeId);
-    setUser({ ...user, recipes: newRecipes });
+    if (user.recipes) {
+      const newRecipes = user.recipes.filter(
+        (recipe) => recipe.id !== recipeId
+      );
+      setUser({ ...user, recipes: newRecipes });
+    }
 
     try {
       const response = await axios.post(
@@ -142,17 +160,17 @@ function UserProfile() {
               <strong>Email:</strong> {user.email}
             </p>
             <p>
-              <strong>age</strong> {user.age}
+              <strong>Age:</strong> {user.age}
             </p>
             <p>
-              <strong>gender</strong> {user.gender}
+              <strong>Gender:</strong> {user.gender}
             </p>
           </div>
         </UserInfoContainer>
       </Col>
       <Col>
         <FavoriteRecipesContainer>
-          <h1 level={3}>Favorite Recipes 😋</h1>
+          <h1>Favorite Recipes 😋</h1>
           <List
             dataSource={user.recipes}
             renderItem={(recipe) => (
@@ -166,7 +184,7 @@ function UserProfile() {
                     View
                   </ActionButton>
                   <ActionButton
-                    type="danger"
+                    type="primary"
                     onClick={() => handleRemoveRecipe(recipe.id)}
                   >
                     Remove
